@@ -185,6 +185,8 @@ boc_API.update_sub_id = function(subId,oauthcode2,selectedAccounts,amount,callba
         }
         // console.log(amount);
         boc_API.sign_payment('351012345671','351092345672',amount, function (transaction_amount,balance) {
+            var user_id = '351012345671'
+            sql_scripts.LogPayment(user_id, transaction_amount);
             callback(transaction_amount,balance);
         })
     })

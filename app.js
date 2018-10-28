@@ -28,7 +28,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(session({ secret: 'sshh', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 app.set('view engine', 'pug')
-var sess;
 
 app.use("/", require("./routes/index"));
 app.use("/bocOauthcb", require("./routes/boc_callback"));
@@ -39,9 +38,8 @@ app.post('/start', function(req,res){
   var url = boc_API.get_app_token(function(url,sub_id) {
     // req.body.amount)
     // console.log(sub_id)
-    sess = req.session
-    sess.amount = 8
-    console.log(req.session.amount)
+    sql_scripts.LogAmount(req.body.amount);
+    // sess.amount = req.body.amount
     res.send(url);
   });
 });
